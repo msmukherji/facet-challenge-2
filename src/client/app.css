@@ -1,8 +1,275 @@
+html {
+    height: 100%;
+}
+
 h1 {
-  color: green;
+	color: #ffffff;
+  font-family: "Quicksand", sans-serif;
 }
 
 body {
   text-align: center;
   margin: auto;
+  font-family: sans-serif;
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: linear-gradient(to bottom right, #697174, #adb9b3);
 }
+
+.page-heading {
+	/*width: max;
+	height: auto;
+	background: black;
+	opacity: .5;
+	padding: 1em;*/
+	/*box-shadow: 0 0 10px 5px gray inset;*/
+}
+
+.main-container {
+	display: grid;
+	grid-template-columns: 25% 85%;
+}
+
+.sidebar-container {
+	display: grid;
+	width: auto;
+}
+
+.maintable-container {
+	display: grid;
+	width: auto;
+}
+
+.table-main {
+	font-family: sans-serif;
+	border: 1px solid #b4c1b8;/*#9aa59d;#a1afa6;*/
+	/*margin-left:1.5em; */
+    margin-right:auto;
+    width: 80%;
+    background: #b4c1b8;
+    border-radius: .2em;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05);
+}
+
+.table-header {
+	/*border-bottom: .2em solid #9aa59d;*/
+	font-family: "Quicksand", sans-serif;
+	padding: .4em .3em .3em;
+	background-color: #2F3232;/*#676F6F;*//*#88929f*/
+	border: none;
+  color: #ffffff;
+}
+
+.table-row {
+	padding: .25em;
+	border-top: 1px solid #9aa59d;
+}
+
+.asset-marker {
+  color: green;
+}
+
+.liability-marker {
+  color: red;
+}
+
+.item-amount {
+  position: absolute;
+  margin-top: .4em;
+  margin-right: 3em;
+  right: 4em;
+}
+
+.delete-button {
+  background-color: transparent;
+  color: white;
+  padding: 0px 0px;  
+  font-size: 16px;
+  cursor: pointer;
+  float: right;
+}
+
+.delete-button:hover {
+  color: #F4E209;
+  background-color: transparent;
+}
+
+.deleted-indicator {
+  background-color: transparent;
+  color: red;
+  font-size: 12px;
+  cursor: not-allowed;;
+  float: right;
+  border: none;
+  padding: .5em .5em;
+  font-size: 12px;
+}
+
+.side-bar {
+	background: #b4c1b8;
+	border: 1px solid #b4c1b8;
+	border-radius: .2em;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05);
+	margin-left: 1.5em;
+	margin-right: 1.5em;
+	padding: .1em;
+  height: max-content;
+}
+
+.side-bar-heading {
+	font-family: "Quicksand", sans-serif;
+  color: #ffffff;
+	padding: .3em;
+	background-color: #2F3232/*#676F6F*//*#88929f*/;
+	margin-bottom: 1em;
+}
+
+.side-bar-content {
+  font-size: .9em;
+  font-family: 'Quicksand';
+  text-align: left;
+  padding-left: .4em;
+  padding-top: .2em;
+}
+
+.side-bar-amount {
+  font-family: sans-serif;
+  font-size: 1.1em;
+  text-align: right;
+  padding-right: .4em;
+  margin-bottom: .2em;
+}
+
+.side-bar-net {
+  border-top: 1px solid #9aa59d;
+	margin-bottom: .5em;
+	margin-top: 1em;
+  font-weight: bold;
+}
+
+
+button, input[type=submit] {
+  background-color: #f7e95c;
+  border: none;
+  padding: .5em 1em;
+  margin: .3em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  font-family: "Quicksand", sans-serif;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #F4E209;
+}
+
+input[type=submit]:hover {
+  background-color: #F4E209;
+}
+
+.add-item-modal {
+  background-color: #b4c1b8;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+
+}
+
+.rmodal-form {
+  display: grid;
+}
+
+.rmodal-background {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128,128,128,0.5);
+  /*display: none;  making it hidden by default */
+}
+
+.rmodal-title {
+  font-size: 1.5em;
+}
+
+.rmodal-form-inputs {
+  padding-bottom: 1em;
+  display: grid;
+}
+
+input {
+  outline: 0;
+  width: auto;
+  border-width: 0 0 2px;
+  border-color: #676f6f;
+  background-color: #b4c1b8;
+  /*padding: 1em;*/
+  font-size: 1em;
+}
+
+input:focus {
+  border-color: #F4E209
+}
+
+input[type=text] {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  width: 90%;
+  text-align: center;
+}
+
+.dropdown-input {
+  float: left;
+  margin: 1em;
+} 
+
+select {
+  outline: 0;
+  border-width: 0 0 0;
+  border-color: #676f6f;
+  background-color: #b4c1b8;
+  /*background-color: #DEEAE2;*/
+  font-size: 1em;
+  float: right;
+  margin-right: 2em;
+}
+
+select:focus {
+  background-color: #DEEAE2;
+}
+
+label {
+  text-align: left;
+  font-family: 'Quicksand';
+}
+
+.rmodal-single-input {
+  padding-top: 1em;
+  text-align: left;
+  margin-left: 10%;
+}
+
+.validation-message {
+  color: #DC5421;
+  font-size: 1em;
+}
+
+.status-success {
+  color: green;
+  padding: 1em;
+}
+
+.status-failure {
+  color: #DC5421;
+}
+
+
+
+
+
