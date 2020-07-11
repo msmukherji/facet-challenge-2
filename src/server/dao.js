@@ -1,7 +1,7 @@
 const config = require('./config')
 
 const getBalanceItems = (req, res) => {
-	config.pool.query('SELECT * FROM balance_item ORDER BY item_id DESC', (error, results) => {
+	config.pool.query('SELECT * FROM balance_item ORDER BY id DESC', (error, results) => {
 		if (error) {
 			res.status(500).send(`server error: ${error}`)
 			return
@@ -16,7 +16,7 @@ const createBalanceItem = (req, res) => {
 	const balance = parseInt(req.body.itemBalance, 10)//use parseFloat? // this needs to use the right type of numeric!
 	const balanceType = req.body.itemType
 	
-	const queryString = `INSERT INTO balance_item (item_name, item_balance, item_balance_type) VALUES ($1, $2, $3)`
+	const queryString = `INSERT INTO balance_item (name, item_balance, balance_type) VALUES ($1, $2, $3)`
 
 	config.pool.query(queryString, [name, balance, balanceType], (error, results) => {
 		if (error) {
@@ -29,7 +29,7 @@ const createBalanceItem = (req, res) => {
 }
 
 const getAssetTotal = (req, res) => {
-	config.pool.query("SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = 'asset'", (error, results) => {
+	config.pool.query("SELECT SUM(item_balance) FROM balance_item WHERE balance_type = 'asset'", (error, results) => {
 		if (error) {
 			res.status(500).send(`server error: ${error}`)
 			return
@@ -40,7 +40,7 @@ const getAssetTotal = (req, res) => {
 }
 
 const getLiabilityTotal = (req, res) => {
-	 config.pool.query("SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = 'liability'", (error, results) => {
+	 config.pool.query("SELECT SUM(item_balance) FROM balance_item WHERE balance_type = 'liability'", (error, results) => {
 		if (error) {
 			res.status(500).send(`server error: ${error}`)
 			return
@@ -51,7 +51,7 @@ const getLiabilityTotal = (req, res) => {
 }
 
 const getNet = (req, res) => {
-	config.pool.query("SELECT COALESCE ((SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = 'asset'), 0) - (SELECT COALESCE ((SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = 'liability'), 0)) AS total", (error, results) => {
+	config.pool.query("SELECT COALESCE ((SELECT SUM(item_balance) FROM balance_item WHERE balance_type = 'asset'), 0) - (SELECT COALESCE ((SELECT SUM(item_balance) FROM balance_item WHERE balance_type = 'liability'), 0)) AS total", (error, results) => {
 		if (error) {
 			res.status(500).send(`server error: ${error}`)
 			return
@@ -64,7 +64,7 @@ const getNet = (req, res) => {
 const deleteBalanceItem = (req, res) => {
 	const itemID = parseInt(req.params.id);
 
-	config.pool.query('DELETE FROM balance_item WHERE item_id = $1', [itemID], (error, results) => {
+	config.pool.query('DELETE FROM balance_item WHERE id = $1', [itemID], (error, results) => {
 		if (error) {
 			res.status(500).send(`server error: ${error}`)
 			return
