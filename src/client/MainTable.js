@@ -37,7 +37,7 @@ export default class MainTable extends Component {
            this.props.balanceItems.map((bi) => 
                     <tr>
                         <td className="table-row"> {bi.name} </td>
-                        <td className={this.getClassForType(bi.item_balance_type)}> {bi.item_balance_type === "asset" ? "+" : "-"} </td>
+                        <td className={this.getClassForType(bi.balance_type)}> {bi.balance_type === "asset" ? "+" : "-"} </td>
                         <td className="table-row"><span className="item-amount">{utils.formatMoney(bi.amount)}</span>
                         <DeleteBalanceItemButton
                             itemID={bi.id}
