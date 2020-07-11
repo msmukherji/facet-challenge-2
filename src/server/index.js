@@ -2,7 +2,7 @@ const express = require('express');
 const os = require('os');
 const bodyParser = require('body-parser')
 const db = require('./dao')
-const svc = require('./svc')
+//const svc = require('./svc')
 
 const app = express();
 
