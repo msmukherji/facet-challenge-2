@@ -10,6 +10,7 @@ const pool = new Pool({
 //^these should go in a separate file with restrictive permissions, not in version control
 
 const getBalanceItems = (req, res) => {
+	console.log("something?  anything?");
 	res.status(200).json([])
 	// pool.query('SELECT * FROM balance_item ORDER BY item_id DESC', (error, results) => {
 	// 	if (error) {
