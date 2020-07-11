@@ -36,11 +36,11 @@ export default class MainTable extends Component {
         return (
            this.props.balanceItems.map((bi) => 
                     <tr>
-                        <td className="table-row"> {bi.item_name} </td>
+                        <td className="table-row"> {bi.name} </td>
                         <td className={this.getClassForType(bi.item_balance_type)}> {bi.item_balance_type === "asset" ? "+" : "-"} </td>
-                        <td className="table-row"><span className="item-amount">{utils.formatMoney(bi.item_balance)}</span>
+                        <td className="table-row"><span className="item-amount">{utils.formatMoney(bi.amount)}</span>
                         <DeleteBalanceItemButton
-                            itemID={bi.item_id}
+                            itemID={bi.id}
                             forceUpdate={this.props.onUpdate}
                             markDeleted={this.markDeleted}
                             showErrorMessage={this.showDeleteError}
