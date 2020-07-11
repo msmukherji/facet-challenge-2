@@ -1,13 +1,4 @@
-const Pool = require('pg').Pool
-const pool = new Pool({
-  user: 'lbphftzmmvhtvr',
-  host: 'postgres://lbphftzmmvhtvr:988625506ac53c25842bffabf97b21fb0fae226428b5fdb629b2eda416f8f68c@ec2-3-216-129-140.compute-1.amazonaws.com:5432/dpr97gkh1t40g',
-  database: 'DATABASE',
-  password: '',
-  port: 5432,
-})
-
-//^these should go in a separate file with restrictive permissions, not in version control
+import './config'
 
 const getBalanceItems = (req, res) => {
 	console.log("something?  anything?");
@@ -22,7 +13,7 @@ const getBalanceItems = (req, res) => {
 
 const createBalanceItem = (req, res) => {
 	const name = req.body.itemName
-	const balance = parseInt(req.body.itemBalance, 10) // this needs to use the right type of numeric!
+	const balance = parseInt(req.body.itemBalance, 10)//use parseFloat? // this needs to use the right type of numeric!
 	const balanceType = req.body.itemType
 	
 	const queryString = `INSERT INTO balance_item (item_name, item_balance, item_balance_type) VALUES ($1, $2, $3)`
