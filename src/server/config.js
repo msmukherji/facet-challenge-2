@@ -1,11 +1,10 @@
 // require('dotenv').config()
 const Pool = require('pg').Pool
-
-
 const isProd = process.env.NODE_ENV === 'production'
 
 const findPool = () => {
 	if (isProd) {
+		console.log(process.env.DATABASE_URL)
 		return new Pool({
 			connectionString: process.env.DATABASE_URL,
 			ssl: isProd
