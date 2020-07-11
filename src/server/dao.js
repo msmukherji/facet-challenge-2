@@ -29,7 +29,7 @@ const createBalanceItem = (req, res) => {
 
 	pool.query(queryString, [name, balance, balanceType], (error, results) => {
 		if (error) {
-			throw error
+			res.status(500).send(`server error: ${error}`)
 		}
 
 		res.status(201).send(`Balance Item added with ID: ${results.insertId}`)
@@ -39,7 +39,7 @@ const createBalanceItem = (req, res) => {
 const getAssetTotal = (req, res) => {
 	pool.query("SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = 'asset'", (error, results) => {
 		if (error) {
-			throw error
+			res.status(500).send(`server error: ${error}`)
 		}
 
 		res.status(200).json(results.rows[0].sum)
@@ -49,7 +49,7 @@ const getAssetTotal = (req, res) => {
 const getLiabilityTotal = (req, res) => {
 	 pool.query("SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = 'liability'", (error, results) => {
 		if (error) {
-			throw error
+			res.status(500).send(`server error: ${error}`)
 		}
 
 		res.status(200).json(results.rows[0].sum)
@@ -59,7 +59,7 @@ const getLiabilityTotal = (req, res) => {
 const getNet = (req, res) => {
 	pool.query("SELECT COALESCE ((SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = 'asset'), 0) - (SELECT COALESCE ((SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = 'liability'), 0)) AS total", (error, results) => {
 		if (error) {
-			throw error
+			res.status(500).send(`server error: ${error}`)
 		}
 
 		res.status(200).json(results.rows[0].total)
@@ -71,7 +71,7 @@ const deleteBalanceItem = (req, res) => {
 
 	pool.query('DELETE FROM balance_item WHERE item_id = $1', [itemID], (error, results) => {
 		if (error) {
-			throw error
+			res.status(500).send(`server error: ${error}`)
 		}
 
 		res.status(204).send(`Balance Item ${itemID} deleted`)
