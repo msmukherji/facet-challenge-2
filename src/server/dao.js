@@ -11,12 +11,14 @@ const pool = new Pool({
 
 const getBalanceItems = (req, res) => {
 	pool.query('SELECT * FROM balance_item ORDER BY item_id DESC', (error, results) => {
-		if (error) {
-			throw error
-		}
+		// if (error) {
+		// 	throw error
+		// }
 
-		res.status(200).json(results.rows);
+		// res.status(200).json(results.rows);
 	})
+	.then(results => res.status(200).json(results.rows))
+	.catch(error => res.status(500).json(error)
 }
 
 const createBalanceItem = (req, res) => {

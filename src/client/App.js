@@ -19,13 +19,13 @@ export default class App extends Component {
             .then(res => res.json())
             .then(user => this.setState({ username: user.username }));
 
-        fetch('/api/net')
-            .then(res => res.json())
-            .then(net => this.setState({ net: net }));
-        
         fetch('/api/balanceItems')
             .then(res => res.json())
             .then(balanceItems => this.setState({ balanceItems: balanceItems }))
+
+        fetch('/api/net')
+            .then(res => res.json())
+            .then(net => this.setState({ net: net }));
 
         fetch('/api/assetTotal')
             .then(res => res.json())

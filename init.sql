@@ -1,11 +1,16 @@
 -- initial schema - just one table, although i first implemented it with two tables, one for assets and one for liabilities
+-- ideally this would be part of the startup/deploy script!  i ddi not get that far :(
 
 create type balance_type as enum ('asset', 'liability');
 
-create table money.balance_item (item_name varchar, item_balance_type balance_type, item_balance numeric(100, 2),
-primary key (balance_item_id));
 
-alter table balance_item rename column balance_item_id to item_id;
+CREATE TABLE balance_item (
+  id              SERIAL PRIMARY KEY,
+  name 			  VARCHAR(100) NOT NULL,
+  balance_type    balance_type NOT NULL,
+  amount		  numeric NOT NULL
+);
+
 
 -- seed some data
 insert into balance_item (item_name, balance_type, item_balance) values (
