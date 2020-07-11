@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import DeleteBalanceItemButton from './DeleteBalanceItemButton'
+import * as utils from './utils'
 
 export default class MainTable extends Component {
     constructor(props) {
@@ -37,7 +38,7 @@ export default class MainTable extends Component {
                     <tr>
                         <td className="table-row"> {bi.item_name} </td>
                         <td className={this.getClassForType(bi.item_balance_type)}> {bi.item_balance_type === "asset" ? "+" : "-"} </td>
-                        <td className="table-row"><span className="item-amount">{bi.item_balance}</span>
+                        <td className="table-row"><span className="item-amount">{utils.formatMoney(bi.item_balance)}</span>
                         <DeleteBalanceItemButton
                             itemID={bi.item_id}
                             forceUpdate={this.props.onUpdate}
@@ -56,9 +57,10 @@ export default class MainTable extends Component {
     }
 
     renderRefreshMessage() {
-        return this.state.showRefreshMessage ?
-            <div className="refresh-message"> Please refresh the page to see your changes. </div>
-            : ""
+        return "" // TODO: show a status somewhere on the page to suggest refresh
+        // return this.state.showRefreshMessage ?
+        //     <div className="refresh-message"> Please refresh the page to see your changes. </div>
+        //     : ""
     }
 
     render() {

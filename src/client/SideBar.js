@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import AddItemModal from "./AddItemModal";
+import * as utils from "./utils"
 
 export default class SideBar extends Component {
     constructor(props) {
@@ -24,13 +25,13 @@ export default class SideBar extends Component {
                     Snapshot
                 </div>
                 <div className="side-bar-content side-bar-a-total">
-                    ASSETS <div className="side-bar-amount">${this.props.assetTotal}</div>
+                    ASSETS <div className="side-bar-amount">${utils.formatMoney(this.props.assetTotal) || "0.00"}</div>
                 </div>
                 <div className="side-bar-content side-bar-l-total">
-                    LIABILITIES <div className="side-bar-amount">${this.props.liabilityTotal}</div>
+                    LIABILITIES <div className="side-bar-amount">${utils.formatMoney(this.props.liabilityTotal) || "0.00"}</div>
                 </div>
                 <div className="side-bar-content side-bar-net">
-                    BALANCE <div className="side-bar-amount">${this.props.total}</div>
+                    BALANCE <div className="side-bar-amount">${utils.formatMoney(this.props.total) || "0.00"}</div>
                 </div>
                 <button onClick={this.addItemHandler}> ADD AN ITEM </button>
                 <AddItemModal isOpen={this.state.modalIsOpen}/>

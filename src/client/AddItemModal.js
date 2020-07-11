@@ -59,9 +59,10 @@ export default class AddItemModal extends React.Component{
 	}
 
 	handleBalanceChange(e) {
+		// TODO: accept and save decimal values!
 		this.validateBalance(e.target.value) ? 
 		this.setState({
-			itemBalance: e.target.value,
+			itemBalance: parseFloat(e.target.value, 2),
 			showValidationMessage: false
 		}) : this.setState({ showValidationMessage: true })
 	}
@@ -141,7 +142,7 @@ export default class AddItemModal extends React.Component{
 		return (
 			<div className="rmodal-form">
 				<form onSubmit={this.handleSubmit}>
-					<div className="rmodal-form-inputs">
+					<div className={`rmodal-form-inputs ${this.state.showSuccess ? "submitted" : ""}`}>
 						<div className="rmodal-single-input">
 							<label for="item-name">NAME</label>
 							<input type="text" id="item-name" name="item-name" value={this.state.itemName} onChange={this.handleNameChange}/><br/>
@@ -208,7 +209,6 @@ export default class AddItemModal extends React.Component{
 	render() {
 		return (
 			this.state.isOpen ?
-			<div className="add-item-modal">
 			<ReactModal
 				contentLabel="Add Item"
 				isOpen={true}
@@ -219,7 +219,6 @@ export default class AddItemModal extends React.Component{
 				{this.renderValidationMessage()}
 				{this.renderAddForm()}
 			</ReactModal>
-			</div>
 			: ""
 		);
 	}

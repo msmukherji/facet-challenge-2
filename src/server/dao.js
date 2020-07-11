@@ -56,7 +56,7 @@ const getLiabilityTotal = (req, res) => {
 }
 
 const getNet = (req, res) => {
-	pool.query('SELECT (SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = \'asset\') - (SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = \'liability\') AS total', (error, results) => {
+	pool.query("SELECT COALESCE ((SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = 'asset'), 0) - (SELECT COALESCE ((SELECT SUM(item_balance) FROM balance_item WHERE item_balance_type = 'liability'), 0)) AS total", (error, results) => {
 		if (error) {
 			throw error
 		}
