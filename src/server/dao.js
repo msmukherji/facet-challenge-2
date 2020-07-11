@@ -16,7 +16,7 @@ const createBalanceItem = (req, res) => {
 	const balance = parseInt(req.body.itemBalance, 10)//use parseFloat? // this needs to use the right type of numeric!
 	const balanceType = req.body.itemType
 	
-	const queryString = `INSERT INTO balance_item (name, item_balance, balance_type) VALUES ($1, $2, $3)`
+	const queryString = `INSERT INTO balance_item (name, amount, balance_type) VALUES ($1, $2, $3)`
 
 	config.pool.query(queryString, [name, balance, balanceType], (error, results) => {
 		if (error) {

@@ -62,7 +62,7 @@ export default class AddItemModal extends React.Component{
 		// TODO: accept and save decimal values!
 		this.validateBalance(e.target.value) ? 
 		this.setState({
-			itemBalance: parseFloat(e.target.value, 2),
+			itemBalance: e.target.value,
 			showValidationMessage: false
 		}) : this.setState({ showValidationMessage: true })
 	}
