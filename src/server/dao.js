@@ -1,8 +1,8 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
-  // user: 'me',
-  host: '127.0.0.1',
-  database: 'moneyz',
+  user: 'lbphftzmmvhtvr',
+  host: 'postgres://lbphftzmmvhtvr:988625506ac53c25842bffabf97b21fb0fae226428b5fdb629b2eda416f8f68c@ec2-3-216-129-140.compute-1.amazonaws.com:5432/dpr97gkh1t40g',
+  database: 'DATABASE',
   password: '',
   port: 5432,
 })
@@ -13,7 +13,7 @@ const getBalanceItems = (req, res) => {
 	console.log("something?  anything?");
 	pool.query('SELECT * FROM balance_item ORDER BY item_id DESC', (error, results) => {
 		if (error) {
-			throw error
+			res.status(500).send(`server error: ${error}`)
 		}
 
 		res.status(200).json(results.rows);
