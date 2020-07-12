@@ -28,7 +28,7 @@ export default class SideBar extends Component {
                     ASSETS <div className="side-bar-amount">${utils.formatMoney(this.props.assetTotal) || "0.00"}</div>
                 </div>
                 <div className="side-bar-content side-bar-l-total">
-                    LIABILITIES <div className="side-bar-amount">${utils.formatMoney(this.props.liabilityTotal) || "0.00"}</div>
+                    LIABILITIES <div className="side-bar-amount">{`(${utils.formatMoney(this.props.liabilityTotal))`} || "0.00"}</div>
                 </div>
                 <div className="side-bar-content side-bar-net">
                     BALANCE <div className="side-bar-amount">${utils.formatMoney(this.props.total) || "0.00"}</div>

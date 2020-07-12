@@ -12,8 +12,14 @@ const getBalanceItems = (req, res) => {
 }
 
 const createBalanceItem = (req, res) => {
+	console.log(req.body.itemBalance)
+	debugger
+	// there should be some more input validation here!
+	// ideally the input could be accepted as a whole number
+	// or a 2-place decimal, and the database would save it with
+	// the decimal removed (i.e., in cents) - less chance of weird math
 	const name = req.body.itemName
-	const balance = parseInt(req.body.itemBalance, 10)//use parseFloat? // this needs to use the right type of numeric!
+	const balance = parseFloat(req.body.itemBalance).toFixed(2)
 	const balanceType = req.body.itemType
 	
 	const queryString = `INSERT INTO balance_item (name, amount, balance_type) VALUES ($1, $2, $3)`
