@@ -12,8 +12,6 @@ const getBalanceItems = (req, res) => {
 }
 
 const createBalanceItem = (req, res) => {
-	console.log(req.body.itemBalance)
-	debugger
 	// there should be some more input validation here!
 	// ideally the input could be accepted as a whole number
 	// or a 2-place decimal, and the database would save it with
