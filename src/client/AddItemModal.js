@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import PropTypes from "prop-types"
 import ReactModal from "react-modal";
-
 
 export default class AddItemModal extends React.Component{
 	constructor(props) {
@@ -29,6 +28,7 @@ export default class AddItemModal extends React.Component{
 		this.handleTypeChange = this.handleTypeChange.bind(this)
 		this.validateName = this.validateName.bind(this)
 		this.validateBalance = this.validateBalance.bind(this)
+		this.validateDecimal = this.validateDecimal.bind(this)
 		this.validateFormFilled = this.validateFormFilled.bind(this)
 		this.addItem = this.addItem.bind(this)
 	}
@@ -74,7 +74,7 @@ export default class AddItemModal extends React.Component{
 	}
 
 	validateName(input) {
-		if (input.length > 10) {
+		if (input.length > 100) {
 		//TODO: && input is sanitized!
 			return false
 		}
@@ -83,12 +83,22 @@ export default class AddItemModal extends React.Component{
 	}
 
 	validateBalance(input) {
-		if (isNaN(input) || input < 0 ) { 
+		if (isNaN(input) || input < 0 || !this.validateDecimal(input)) {
 		//TODO: && input is sanitized and max length == max length of db column
 			return false
 		}
 		return true
 		// also ideally would use a ternary operator
+	}
+
+	validateDecimal(input) {
+		// needs some refining
+		const inputString = input.toString()
+		const regex = /^[0-9]*(\.[0-9]{0,2})?$/;
+		if (!inputString.match(regex)) {
+			return false
+		}
+		return true
 	}
 
 	validateFormFilled() {
